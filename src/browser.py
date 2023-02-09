@@ -19,6 +19,7 @@ from aqt.qt import (
     QPushButton,
     Qt,
     QWidget,
+    QPushButton,
 )
 
 
