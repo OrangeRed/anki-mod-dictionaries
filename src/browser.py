@@ -22,8 +22,7 @@ from aqt.qt import (
 
 class DictionaryLookup(QDialog):
     def test_func(self) -> None:
-        # get the number of cards in the current collection, which is stored in
-        # the main window
+        # get the number of cards in the current collection, which is stored in the main window
         card_count = mw.col.cardCount()
         # show a message box
         utils.showInfo("Card count: %d" % card_count)
@@ -49,22 +48,13 @@ class DictionaryLookup(QDialog):
         self.dictionaries.setToolTip("The dictionary from which to look up words.")
 
         # sort fields by position, just to be safe
-        fields = [
-            field["name"]
-            for field in sorted(
-                brws.col.models.get(note_type_id)["flds"], key=lambda f: f["ord"]
-            )
-        ]
+        fields = [field["name"] for field in sorted(brws.col.models.get(note_type_id)["flds"], key=lambda f: f["ord"])]
         self.search_fields = QComboBox(self)
         self.search_fields.addItems(fields)
-        self.search_fields.setToolTip(
-            "The field that will be used to query the dictionary."
-        )
+        self.search_fields.setToolTip("The field that will be used to query the dictionary.")
         self.target_fields = QComboBox(self)
         self.target_fields.addItems(fields)
-        self.target_fields.setToolTip(
-            "The field that will contain the queried defintion."
-        )
+        self.target_fields.setToolTip("The field that will contain the queried defintion.")
 
         """
         TODO Add Various Tagging Check Boxes
@@ -103,9 +93,7 @@ def insert_menu_item(brws: Browser) -> None:
         try:
             note_type_id = brws.col.models.get_single_notetype_of_notes(note_ids)
         except InvalidInput:
-            utils.showWarning(
-                "Please make sure the selected notes are the same note type."
-            )
+            utils.showWarning("Please make sure the selected notes are the same note type.")
 
         brws.dict_lookup = DictionaryLookup(brws, note_type_id, note_ids, brws)
         brws.dict_lookup.show()

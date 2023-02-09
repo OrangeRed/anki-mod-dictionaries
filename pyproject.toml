@@ -1,0 +1,5 @@
+[tool.flake8]
+ignore = ['E501']
+
+[tool.black]
+line-length = 120

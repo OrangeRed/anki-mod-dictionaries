@@ -2,4 +2,5 @@ mypy
 aqt[qt6]
 
 flake8
+flake8-pyproject
 black
