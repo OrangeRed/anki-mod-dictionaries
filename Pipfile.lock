@@ -1,0 +1,5 @@
+mypy
+aqt[qt6]
+
+flake8
+black
