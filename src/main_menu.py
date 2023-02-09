@@ -6,8 +6,7 @@ from aqt.qt import QAction, QDialog, QHBoxLayout, QVBoxLayout, QPushButton, Qt, 
 
 class AddonSettings(QDialog):
     def test_func(self) -> None:
-        # get the number of cards in the current collection, which is stored in
-        # the main window
+        # get the number of cards in the current collection, which is stored in the main window
         card_count = mw.col.cardCount()
         # show a message box
         utils.showInfo("Card count: %d" % card_count)
