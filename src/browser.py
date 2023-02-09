@@ -1,4 +1,6 @@
+import os
 from typing import Optional, Sequence
+from .util import get_path
 
 from aqt import mw, utils
 from anki.errors import InvalidInput
@@ -40,11 +42,13 @@ class DictionaryLookup(QDialog):
         self.setWindowTitle("Dictionary Lookup")
         self.setWindowModality(Qt.WindowModality.ApplicationModal)
 
-        """
-        TODO Add imported dictionaries to this Combo Box
-        """
+        user_files = get_path("user_files")
+        if not os.path.exists(user_files):
+            utils.showWarning("user_files folder doesn't exist, can't access dictionaries")
+            self.reject()
+
         self.dictionaries = QComboBox(self)
-        # self.dictionaries.addItems(dicts)
+        self.dictionaries.addItems(os.listdir(user_files))
         self.dictionaries.setToolTip("The dictionary from which to look up words.")
 
         # sort fields by position, just to be safe
@@ -56,9 +60,6 @@ class DictionaryLookup(QDialog):
         self.target_fields.addItems(fields)
         self.target_fields.setToolTip("The field that will contain the queried defintion.")
 
-        """
-        TODO Add Various Tagging Check Boxes
-        """
         self.no_def_tag = QCheckBox("Tag notes whose query was not found.", self)
         self.no_def_tag.setChecked(True)
         self.no_def_tag.setToolTip(
